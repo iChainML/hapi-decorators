@@ -4,6 +4,7 @@
   "jsRules": {},
   "rules": {
     "no-bitwise": false,
+    "ordered-imports": false,
     "eofline": false,
     "no-empty": false,
     "max-line-length": [80],

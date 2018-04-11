@@ -19,10 +19,10 @@ export function Module(baseUrl: string) {
     constructor: T
   ) {
     return class extends constructor {
-      [hapiMetadataKey] = {
+      private [hapiMetadataKey] = {
         baseUrl
       };
-      routeSetting() {
+      public routeSetting() {
         return getRoutes(this);
       }
     };
@@ -40,7 +40,7 @@ function getRoutes(target: any) {
     return [];
   }
 
-  return hapiSetting.rawRoutes.map(function(route) {
+  return hapiSetting.rawRoutes.map(route => {
     if (!('path' in route)) {
       throw new Error('Route path must be set with `@Route` or another alias');
     }
@@ -56,17 +56,13 @@ function getRoutes(target: any) {
 
 export function Route(method: RouteMethod, path: string) {
   debug('@route (or alias) setup');
-  return function(
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const targetName = target.constructor.name;
     const routeId = targetName + '.' + propertyKey;
 
     setRoute(target, propertyKey, {
-      method: method,
-      path: path,
+      method,
+      path,
       config: {
         id: routeId
       },
@@ -83,13 +79,9 @@ export function Route(method: RouteMethod, path: string) {
  */
 export function Config(config) {
   debug('@config setup');
-  return function(
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     setRoute(target, propertyKey, {
-      config: config
+      config
     });
     return descriptor;
   };
@@ -101,11 +93,7 @@ export function Config(config) {
  */
 export function Validate(validateConfig: any) {
   debug('@validate setup');
-  return function(
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     setRoute(target, propertyKey, {
       config: {
         validate: validateConfig
@@ -122,11 +110,7 @@ export function Validate(validateConfig: any) {
  */
 export function Cache(cacheConfig: any) {
   debug('@cache setup');
-  return function(
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     setRoute(target, propertyKey, {
       config: {
         cache: cacheConfig
@@ -143,11 +127,7 @@ export function Cache(cacheConfig: any) {
  */
 export function Pre(pre: string | any) {
   debug('@pre setup');
-  return function(
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const hapiSetting = target[hapiMetadataKey];
     if (typeof pre === 'string') {
       pre = [{ method: hapiSetting.middleware[pre] }];
@@ -156,7 +136,7 @@ export function Pre(pre: string | any) {
     }
     setRoute(target, propertyKey, {
       config: {
-        pre: pre
+        pre
       }
     });
 
@@ -169,11 +149,7 @@ export function Pre(pre: string | any) {
  * and to be used in @Pre
  */
 export function Middleware() {
-  return function(
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const hapiSetting = target[hapiMetadataKey];
     if (!hapiSetting.middleware) {
       hapiSetting.middleware = {};
@@ -198,7 +174,9 @@ function setRoute(target: any, propertyKey: string, value: any) {
       id: routeId
     }
   };
-  const found = find(hapiSetting.rawRoutes, 'config.id', routeId);
+  const found = find(hapiSetting.rawRoutes, item => {
+    return item.config.id === routeId;
+  });
 
   if (found) {
     debug('Subsequent configuration of route object for: %s', routeId);
