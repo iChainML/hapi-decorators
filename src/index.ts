@@ -16,7 +16,7 @@ enum RouteMethods {
 
 const routeInfo = new WeakMap();
 
-const routeConfig: any = [];
+const routeConfig: any[] = [];
 
 export interface JoiSchema {
   [key: string]: AnySchema;
