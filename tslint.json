@@ -7,6 +7,7 @@
     "ordered-imports": false,
     "eofline": false,
     "no-empty": false,
+    "whitespace": false,
     "max-line-length": [80],
     "max-classes-per-file": [4],
     "prefer-for-of": false,

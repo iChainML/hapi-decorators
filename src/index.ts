@@ -41,6 +41,7 @@ export interface Validation {
   validate: ValidationOptions;
   tags?: string[];
   description?: string;
+  auth?: string;
 }
 export type RouteMethod = 'get' | 'post' | 'put' | 'delete' | 'patch' | '*';
 
@@ -161,7 +162,7 @@ export function Validate(validateConfig: Validation) {
         }
       }
     };
-    ['tags', 'description'].forEach(key => {
+    ['tags', 'description', 'auth'].forEach(key => {
       const value = (<any>validateConfig)[key];
       if (value) {
         finalConfig.options[key] = value;
