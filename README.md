@@ -4,7 +4,7 @@
 
 ```ts
 import { Module, Get, Post } from 'hapi-decorators';
-import { Request, ResponseToolkit } from 'hapi';
+import { Request, ResponseToolkit, routeSettings } from 'hapi';
 
 @Module('/api/vote')
 class Vote {
@@ -18,7 +18,20 @@ class Vote {
   }
 }
 
-const vote = new Vote();
+@Module('/api/user')
+class User {
+  @Get('/{id}')
+  getUserById(req: Request, h: ResponseToolkit) {
+    // ...
+  }
+  @Post('/{id}')
+  updateUserById() {
+    //...
+  }
+}
 
-server.route(vote.routeSetting());
+const vote = new Vote();
+const user = new User();
+
+server.route(routeSetting());
 ```
