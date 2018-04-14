@@ -1,15 +1,17 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "target": "ES2015",
     "sourceMap": true,
+    "importHelpers": true,
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "emitDecoratorMetadata": true,
     "declaration": true,
-    "outDir": "build"
+    "outDir": "dist"
   },
   "include": ["src/", "test/"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.test.ts", "test"]
 }

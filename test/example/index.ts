@@ -1,4 +1,10 @@
-import { Controller, Get, Post, ServerSettings, ServerLoader } from '../index';
+import {
+  Controller,
+  Get,
+  Post,
+  ServerSettings,
+  ServerLoader
+} from '../../src/index';
 import { Request, ResponseToolkit } from 'hapi';
 
 @ServerSettings({
