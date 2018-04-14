@@ -28,6 +28,7 @@ done
 
 
 read -p "Ready to publish @ichainml/hapi-decorators@$version. [Enter] to continue"
-cp package.json ./dist/
+cp package.json README.md ./dist/
+
 cd ./dist/
 npm publish --access public
