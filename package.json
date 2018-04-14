@@ -13,7 +13,8 @@
     "build": "npm run clean && tsc",
     "build:prod": "npm run clean && tsc -p tsconfig.prod.json",
     "clean": "rm -rf ./dist && rm -rf ./build",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "prepublish": "npm run build:prod"
   },
   "typings": "index.d.ts",
   "dependencies": {

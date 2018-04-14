@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "building prod version"
-npm run build:prod
-
 echo "What type of publish?"
 select version_type in "patch" "minor" "major"; do
     read -p "Creating commit and tag for a $version_type release. Press [Enter].";
