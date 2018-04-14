@@ -21,6 +21,7 @@
     "lodash": "^4.17.5"
   },
   "peerDependencies": {
+    "hapi": "^17.3.1",
     "boom": "^7.2.0"
   },
   "devDependencies": {
@@ -30,13 +31,13 @@
     "@types/joi": "^13.0.7",
     "@types/lodash": "^4.14.106",
     "conventional-changelog-cli": "^1.3.21",
-    "hapi": "^17.3.1",
     "joi": "^13.1.2",
     "reflect-metadata": "^0.1.12",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
   },
-  "description": "```ts\r import {\r   Controller,\r   Get,\r   Post,\r   ServerSettings,\r   ServerLoader\r } from 'hapi-decorators';\r import { Request, ResponseToolkit, routeSettings } from 'hapi';\r import * as inert from 'inert';",
+  "description":
+    "```ts\r import {\r   Controller,\r   Get,\r   Post,\r   ServerSettings,\r   ServerLoader\r } from 'hapi-decorators';\r import { Request, ResponseToolkit, routeSettings } from 'hapi';\r import * as inert from 'inert';",
   "bugs": {
     "url": "https://github.com/iChainML/hapi-decorators/issues"
   },
