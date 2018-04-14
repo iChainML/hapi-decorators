@@ -30,4 +30,4 @@ done
 read -p "Ready to publish @ichainml/hapi-decorators@$version. [Enter] to continue"
 cp package.json ./dist/
 cd ./dist/
-npm publish
+npm publish --access public
