@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 echo "What type of publish?"
 select version_type in "patch" "minor" "major"; do
     read -p "Creating commit and tag for a $version_type release. Press [Enter].";
@@ -22,7 +22,7 @@ select version_type in "patch" "minor" "major"; do
 done
 
 
-read -p "Ready to publish @ichanml/hapi-decorators@$version. [Enter] to continue"
+read -p "Ready to publish @ichainml/hapi-decorators@$version. [Enter] to continue"
 cp package.json ./dist/
 cd ./dist/
 npm publish
