@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iChanML/hapi-decorators.git"
+    "url": "git+https://github.com/iChainML/hapi-decorators.git"
   },
   "author": "Hongbo LU <gitawego@gmail.com>",
   "license": "MIT",
