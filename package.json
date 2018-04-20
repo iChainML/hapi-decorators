@@ -1,10 +1,10 @@
 {
   "name": "@ichainml/hapi-decorators",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iChanML/hapi-decorators.git"
+    "url": "git+https://github.com/iChainML/hapi-decorators.git"
   },
   "author": "Hongbo LU <gitawego@gmail.com>",
   "license": "MIT",

@@ -3,7 +3,7 @@ import { merge, find } from 'lodash';
 import * as Debug from 'debug';
 import { ResponseToolkit, RouteOptions } from 'hapi';
 import { badRequest } from 'boom';
-import { AnySchema } from 'joi';
+import { AnySchema, SchemaLike } from 'joi';
 const debug = Debug('hapiDecorators');
 enum RouteMethods {
   Get = 'get',
@@ -31,11 +31,11 @@ export interface JoiValidator {
 export interface ValidationOptions {
   errorFields?: string[];
   failAction?: (request: Request, h: ResponseToolkit, err: any) => void;
-  headers?: boolean | JoiValidator;
-  params?: boolean | JoiValidator;
-  query?: boolean | JoiValidator;
-  payload?: boolean | JoiValidator;
-  options?: JoiValidator;
+  headers?: SchemaLike | SchemaLike[];
+  params?: SchemaLike | SchemaLike[];
+  query?: SchemaLike | SchemaLike[];
+  payload?: SchemaLike | SchemaLike[];
+  options?: SchemaLike | SchemaLike[];
 }
 export interface Validation {
   validate: ValidationOptions;
@@ -95,7 +95,7 @@ function getRoutes(target: any) {
     const url = base + trimslash(route.path) || '/';
     const hapiRoute = merge({}, route);
     hapiRoute.path = url;
-    hapiRoute.options.bind = target;
+    // hapiRoute.options.bind = target;
     return hapiRoute;
   });
 }
@@ -112,7 +112,7 @@ export function Route(method: RouteMethod, path: string) {
       options: {
         id: routeId
       },
-      handler: descriptor.value
+      handler: descriptor.value.bind(target)
     });
 
     return descriptor;
@@ -240,7 +240,7 @@ function setRoute(target: any, propertyKey: string, value: any) {
   const routeId = targetName + '.' + propertyKey;
   const defaultRoute = {
     options: {
-      id: routeId
+      id: routeId,
     }
   };
   const found = find(hapiSetting.rawRoutes, item => {
