@@ -20,6 +20,8 @@ select version_type in "patch" "minor" "major"; do
     git diff
     read -p "Examine and correct CHANGELOG.md. [Enter] to continue"
 
+    git commit -am "chore(changelog): updated changelog for $version"
+
     git tag $version
 
     read -p "git tag updated to $version; [Enter] to continue";
