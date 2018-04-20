@@ -1,5 +1,7 @@
 # hapi-decorators
 
+[![npm version](https://badge.fury.io/js/%40ichainml%2Fhapi-decorators.svg)](https://badge.fury.io/js/%40ichainml%2Fhapi-decorators)
+
 ```shell
 npm install @ichainml/hapi-decorators
 ```
