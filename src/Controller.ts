@@ -95,7 +95,7 @@ function getRoutes(target: any) {
     const url = base + trimslash(route.path) || '/';
     const hapiRoute = merge({}, route);
     hapiRoute.path = url;
-    hapiRoute.options.bind = target;
+    // hapiRoute.options.bind = target;
     return hapiRoute;
   });
 }
@@ -240,7 +240,8 @@ function setRoute(target: any, propertyKey: string, value: any) {
   const routeId = targetName + '.' + propertyKey;
   const defaultRoute = {
     options: {
-      id: routeId
+      id: routeId,
+      bind: target,
     }
   };
   const found = find(hapiSetting.rawRoutes, item => {
@@ -249,6 +250,7 @@ function setRoute(target: any, propertyKey: string, value: any) {
 
   if (found) {
     debug('Subsequent configuration of route object for: %s', routeId);
+    found.options.bind = target;
     merge(found, value);
   } else {
     debug('Initial setup of route object for: %s', routeId);
