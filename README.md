@@ -1,5 +1,9 @@
 # hapi-decorators
 
+```shell
+npm install @ichainml/hapi-decorators
+```
+
 ## usage
 
 ```ts
