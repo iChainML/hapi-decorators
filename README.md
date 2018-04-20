@@ -59,6 +59,7 @@ class Vote extends Api {
   }
 }
 
+/** all the endpoints must be instantiated before server start. */
 const user = new UserApi('test');
 const vote = new Vote();
 console.log(user, vote);
