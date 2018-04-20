@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { merge, find } from 'lodash';
 import * as Debug from 'debug';
 import { ResponseToolkit, RouteOptions } from 'hapi';
