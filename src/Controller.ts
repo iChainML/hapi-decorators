@@ -18,9 +18,6 @@ const routeInfo = new WeakMap();
 
 const routeConfig: any[] = [];
 
-export interface JoiSchema {
-  [key: string]: AnySchema;
-}
 export interface ValidationOptions {
   errorFields?: string[];
   failAction?: (request: Request, h: ResponseToolkit, err: any) => void;
