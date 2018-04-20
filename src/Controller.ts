@@ -112,7 +112,7 @@ export function Route(method: RouteMethod, path: string) {
       options: {
         id: routeId
       },
-      handler: descriptor.value
+      handler: descriptor.value.bind(target)
     });
 
     return descriptor;
@@ -241,7 +241,6 @@ function setRoute(target: any, propertyKey: string, value: any) {
   const defaultRoute = {
     options: {
       id: routeId,
-      bind: target,
     }
   };
   const found = find(hapiSetting.rawRoutes, item => {
@@ -250,7 +249,6 @@ function setRoute(target: any, propertyKey: string, value: any) {
 
   if (found) {
     debug('Subsequent configuration of route object for: %s', routeId);
-    found.options.bind = target;
     merge(found, value);
   } else {
     debug('Initial setup of route object for: %s', routeId);
