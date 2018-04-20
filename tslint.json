@@ -3,6 +3,7 @@
   "extends": ["tslint:recommended"],
   "jsRules": {},
   "rules": {
+    "member-access": [true, "no-public"],
     "no-bitwise": false,
     "ordered-imports": false,
     "eofline": false,

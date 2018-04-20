@@ -3,7 +3,8 @@ import {
   Get,
   Post,
   ServerSettings,
-  ServerLoader
+  ServerLoader,
+  Api
 } from '../../src/index';
 import { Request, ResponseToolkit } from 'hapi';
 
@@ -15,37 +16,41 @@ class Server extends ServerLoader {
   // public async initPlugins() {
   //   // await this.server.register(inert);
   // }
-  public onServerStarted() {
+  onServerStarted() {
     console.log(`server started at ${this.server.info.uri}`);
   }
 }
 
 @Controller('/api/user')
-class UserApi {
-  @Get('/{id}')
-  public getUserById() {
-    return 1;
+class UserApi extends Api {
+  constructor(private id: string) {
+    super();
+  }
+  @Get('')
+  getUserById() {
+    return this.id;
   }
 
   @Post('/{id}')
-  public updateUserId() {
+  updateUserId() {
     // todo
   }
 }
 
 @Controller('/api/vote')
-class Vote {
+class Vote extends Api {
   @Get('/all')
-  public getAllVotes(req: Request, h: ResponseToolkit) {
+  getAllVotes(req: Request, h: ResponseToolkit) {
     // ...
   }
   @Post('')
-  public addVote() {
+  addVote() {
     // ...
   }
 }
 
-const user = new UserApi();
+const user = new UserApi('test');
 const vote = new Vote();
+console.log(user, vote);
 const server = new Server();
 server.start();

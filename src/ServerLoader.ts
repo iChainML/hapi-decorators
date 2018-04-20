@@ -1,13 +1,13 @@
 import { Server } from 'hapi';
 
 export class ServerLoader {
-  public server: Server;
-  public initPlugins(server?: Server) {
+  server: Server;
+  initPlugins(server?: Server) {
     return Promise.resolve();
   }
-  public start() {
+  start() {
     return Promise.reject('server is not initialized');
   }
-  public onServerStarted() {}
-  public onServerFailed(err: any) {}
+  onServerStarted() {}
+  onServerFailed(err: any) {}
 }

@@ -14,6 +14,7 @@ enum RouteMethods {
   All = '*'
 }
 
+const routeSettingMetadata = Symbol('routeSetting');
 const routeInfo = new WeakMap();
 
 const routeConfig: any[] = [];
@@ -49,7 +50,6 @@ function metaData(target: any, data?: any) {
   const isSet = arguments.length === 2;
   const constructor = target.constructor;
   const metadata = routeInfo.get(constructor);
-  console.log('get meta', metadata);
   if (!metadata) {
     routeInfo.set(constructor, {});
   }
@@ -59,18 +59,22 @@ function metaData(target: any, data?: any) {
   }
   return metadata || {};
 }
+
+export class Api {
+  constructor() {
+    (this as any)[routeSettingMetadata]();
+  }
+}
+
 export function Controller(baseUrl: string) {
   return function HapiModule<T extends { new (...args: any[]): {} }>(
     constructor: T
   ) {
     const metadata: any = routeInfo.get(constructor) || {};
     metadata.baseUrl = baseUrl;
-    console.log('called Module');
-    routeConfig.push(
-      ...getRoutes({
-        constructor
-      })
-    );
+    constructor.prototype[routeSettingMetadata] = function() {
+      routeConfig.push(...getRoutes(this));
+    };
     return constructor;
   };
 }
@@ -95,7 +99,7 @@ function getRoutes(target: any) {
     const url = base + trimslash(route.path) || '/';
     const hapiRoute = merge({}, route);
     hapiRoute.path = url;
-    // hapiRoute.options.bind = target;
+    hapiRoute.options.bind = target;
     return hapiRoute;
   });
 }
@@ -112,7 +116,7 @@ export function Route(method: RouteMethod, path: string) {
       options: {
         id: routeId
       },
-      handler: descriptor.value.bind(target)
+      handler: descriptor.value
     });
 
     return descriptor;
@@ -240,7 +244,7 @@ function setRoute(target: any, propertyKey: string, value: any) {
   const routeId = targetName + '.' + propertyKey;
   const defaultRoute = {
     options: {
-      id: routeId,
+      id: routeId
     }
   };
   const found = find(hapiSetting.rawRoutes, item => {
