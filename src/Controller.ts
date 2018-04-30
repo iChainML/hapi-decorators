@@ -2,7 +2,7 @@ import { merge, find } from 'lodash';
 import * as Debug from 'debug';
 import { ResponseToolkit, RouteOptions } from 'hapi';
 import { badRequest } from 'boom';
-import { AnySchema, SchemaLike } from 'joi';
+import { SchemaLike } from 'joi';
 const debug = Debug('hapiDecorators');
 enum RouteMethods {
   Get = 'get',

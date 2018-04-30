@@ -35,7 +35,7 @@
     "hapi": "^17.3.1",
     "joi": "^13.1.2",
     "tslint": "^5.9.1",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.3"
   },
   "description": "```ts\r import {\r   Controller,\r   Get,\r   Post,\r   ServerSettings,\r   ServerLoader\r } from 'hapi-decorators';\r import { Request, ResponseToolkit, routeSettings } from 'hapi';\r import * as inert from 'inert';",
   "bugs": {
