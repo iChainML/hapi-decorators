@@ -10,6 +10,9 @@ export function ServerSettings(options: ServerOptions) {
           await this.initPlugins(this.server);
         }
         this.server.route(routeSettings());
+        if (this.initRoutes) {
+          await this.initRoutes(this.server);
+        }
         await this.server.start();
         this.onServerStarted(this.server);
       } catch (err) {

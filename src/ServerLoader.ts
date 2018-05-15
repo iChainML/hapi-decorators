@@ -5,6 +5,9 @@ export class ServerLoader {
   initPlugins(server?: Server) {
     return Promise.resolve();
   }
+  initRoutes(server?: Server) {
+    return Promise.resolve();
+  }
   start() {
     return Promise.reject('server is not initialized');
   }
